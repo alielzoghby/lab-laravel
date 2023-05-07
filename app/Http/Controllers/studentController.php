@@ -47,20 +47,17 @@ class studentController extends Controller
         if($validator->fails()) {
             return Redirect::back()->withErrors($validator);
         }
-        // Student::create(array_merge($request->all(),['user_id'=>$request->user()->id]));
         $request->user()->students()->create($request->all());
         return redirect()->route('student.index')->with('success','Student Ceated Successfully');
     }
 
     public function index()
     {
-        // $students = Student::where('user_id',Auth::id())->get();
         return view('student.index',['students' => Auth::user()->students ]);
     }
 
     public function edit( Student $student)
     {
-        // $student = Student::find($id);
         return view('student.edit',['student'=>$student]);
     }
 
